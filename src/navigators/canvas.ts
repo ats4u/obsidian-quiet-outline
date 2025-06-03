@@ -51,7 +51,7 @@ export class CanvasNav extends Nav {
 
 			const node = component as CanvasNode;
 			
-			if (node.unknownData.type === "file" && (node as CanvasFileNode).file.extension === "md") {
+			if (node.unknownData.type === "file" && ['qmd','rmd','md'].include((node as CanvasFileNode).file.extension) ) {
 				const view = (node as CanvasFileNode).child as EmbedMarkdownView;
 				await plugin.updateNav("embed-markdown-file", view);
 				await plugin.refresh_outline();
@@ -163,16 +163,22 @@ function chooseIcon(node: AllCanvasNodeData): SupportedIcon {
 	if (node.type === "file") {
 		if (node.file.endsWith(".md")) {
 			return "ArticleOutlined";
-		}	
+		}
+		if (node.file.endsWith(".qmd")) {
+			return "ArticleOutlined";
+		}
+		if (node.file.endsWith(".rmd")) {
+			return "ArticleOutlined";
+		}
 		if (node.file.endsWith(".mp3")) {
 			return "AudiotrackOutlined";
-		}	
+		}
 		if (node.file.endsWith(".mp4")) {
 			return "OndemandVideoOutlined";
-		}	
+		}
 		if (node.file.endsWith(".png") || node.file.endsWith(".jpg")) {
 			return "ImageOutlined";
-		}	
+		}
 	}
 	return "FilePresentOutlined";
 }
