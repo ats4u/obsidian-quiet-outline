@@ -51,7 +51,7 @@ export class CanvasNav extends Nav {
 
 			const node = component as CanvasNode;
 			
-			if (node.unknownData.type === "file" && ['qmd','rmd','md'].include((node as CanvasFileNode).file.extension) ) {
+			if (node.unknownData.type === "file" && ['qmd','rmd','md'].includes((node as CanvasFileNode).file.extension) ) {
 				const view = (node as CanvasFileNode).child as EmbedMarkdownView;
 				await plugin.updateNav("embed-markdown-file", view);
 				await plugin.refresh_outline();
